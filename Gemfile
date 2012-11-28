@@ -5,6 +5,7 @@ gem 'pg'
 gem 'thin'
 gem 'jquery-rails'
 gem 'omniauth-facebook'
+gem 'koala'
 
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'

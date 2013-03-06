@@ -1,0 +1,7 @@
+Showing photos for <%= @photo_type %>!
+
+<ul>
+	<% @photos.each do |photo| %>
+		<%= image_tag photo.source %>
+	<% end %>
+</ul>

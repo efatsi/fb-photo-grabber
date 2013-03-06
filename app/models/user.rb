@@ -3,7 +3,9 @@ class User < ActiveRecord::Base
 
   def self.from_access_token(token)
     fb_user = FbGraph::User.me(token).fetch
-    find_or_create_by_name(fb_user.name, :access_token => fb_user.access_token)
+    user = find_or_create_by_name(fb_user.name)
+    user.update_attribute(:access_token, fb_user.access_token)
+    user
   end
 
   def photo

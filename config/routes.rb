@@ -1,4 +1,5 @@
 Facebook::Application.routes.draw do
+  mount StatBoard::Engine, :at => "/stats"
 
   resource :user
 

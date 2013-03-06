@@ -7,7 +7,7 @@ class PhotosController < ApplicationController
   end
 
   def profile
-    @photo_type = 'profile'
+    @photo_type = 'profile pictures'
     @photos = current_user.profile_pics
     render :partial => 'show_photos'
   end

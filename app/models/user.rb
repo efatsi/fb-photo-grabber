@@ -8,14 +8,6 @@ class User < ActiveRecord::Base
     user
   end
 
-  def photo
-    fb_user.albums.first.photos.first
-  end
-
-  def fb_user
-    @fb_user ||= FbGraph::User.me(access_token).fetch
-  end
-
   def wall_photos
     album_of_type('wall').photos
   end
@@ -24,9 +16,26 @@ class User < ActiveRecord::Base
     album_of_type('profile').photos
   end
 
+  def friend_pics
+    friends.flat_map do |friend|
+      friend.photos_of_user
+    end
+  end
+
   private
+
+  def friends
+    fb_user.friends.select{|a| a.name.include?('Fatsi')}.map do |f|
+      FbPhoto::Friend.new(f, self)
+    end
+  end
 
   def album_of_type(type)
     fb_user.albums.select{|a| a.type == type}.first
   end
+
+  def fb_user
+    @fb_user ||= FbGraph::User.me(access_token).fetch
+  end
+
 end

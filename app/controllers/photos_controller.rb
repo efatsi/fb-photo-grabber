@@ -13,8 +13,8 @@ class PhotosController < ApplicationController
   end
 
   def friends
-    @photo_type = 'friends ... soon'
-    @photos = []
+    @photo_type = "friend's pictures (Fatsi's only at the moment)"
+    @photos = current_user.friend_pics
     render :partial => 'show_photos'
   end
 
